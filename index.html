@@ -1,222 +1,225 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Likha Studios - A small indie game development team from the Philippines creating unique and engaging gaming experiences">
-    <meta name="keywords" content="indie games, game development, Philippines, Likha Studios, Pong Clash">
-    <meta name="author" content="Likha Studios">
-    <meta property="og:title" content="Likha Studios - Indie Game Development Team">
-    <meta property="og:description" content="Creating unique and engaging gaming experiences">
-    <meta property="og:image" content="./assets/Hero.png">
-    <meta property="og:url" content="https://likha-studio.itch.io">
-    <title>Likha Studios - Indie Game Development Team</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="icon" type="image/png" href="./assets/Untitled (150 x 50 px).png">
-</head>
-<body>
-    <!-- Add your logo image in the nav-brand div -->
-    <nav class="navbar">
-        <div class="nav-brand">
-            <!-- Add logo: recommended size 150x50px -->
-            <img src=".//assets/Untitled (150 x 50 px).png" alt="Likha Studios Logo">
-        </div>
-        <button class="hamburger" aria-label="Toggle navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#about">About Us</a>
-            <a href="#team">Our Team</a>
-            <a href="#games">Games</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>
-            <button id="theme-toggle" aria-label="Toggle dark mode">
-                <i class="fas fa-moon"></i>
-            </button>
-        </div>
-    </nav>
+using UnityEngine;
 
-    <section id="home" class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./assets/Hero.png') center/cover;">
-        <div class="hero-content">
-            <h1>Welcome to Likha Studios</h1>
-            <p> A small indie game developers from the Philippines</p>
-            <a href="#games" class="cta-button">View Our Games</a>
-        </div>
-    </section>
+public class ReactorScreen : MonoBehaviour
+{
+    [Header("Slingshot Settings")]
+    [SerializeField] private float maxPullDistance = 5f;
+    [SerializeField] private float launchForce = 20f;
+    [SerializeField] private float maxLaunchForce = 30f;
 
-    <section id="about" class="about" style="background: url('./assets/About.png') center/cover;">
-        <h2>About Our Studio</h2>
-        <div class="about-content">
-            <p>Likha Studios is a small indie game development team dedicated to creating unique and engaging gaming experiences. Our focus is on innovation, creativity, and player satisfaction.</p>
-            <div class="about-grid">
-                <div class="about-card">
-                    <i class="fas fa-gamepad"></i>
-                    <h3>Our Vision</h3>
-                    <p>To create memorable gaming experiences that bring joy and excitement to players worldwide.</p>
-                </div>
-                <div class="about-card">
-                    <i class="fas fa-lightbulb"></i>
-                    <h3>Our Mission</h3>
-                    <p>To develop innovative games that push creative boundaries while maintaining high quality and player engagement.</p>
-                </div>
-                <div class="about-card">
-                    <i class="fas fa-trophy"></i>
-                    <h3>Our Achievements</h3>
-                    <p>Successfully launched Pong Clash! on itch.io, gaining positive feedback from the gaming community.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    [Header("Physics Settings")]
+    [SerializeField] private float friction = 0.05f;
+    [SerializeField] private float bounciness = 0.8f;
+    [SerializeField] private float maxSlideSpeed = 15f;
+    [SerializeField] private float gravityScale = 1f;
+    [SerializeField] private float angularDrag = 0.1f;
+    [SerializeField] private float maxAngularSpeed = 10f;
 
-    <section id="faq" class="faq" style="text-align:center;">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-container">
-            <div class="faq-item">
-                <h3>What games do you develop? <span class="faq-toggle">&#9654;</span></h3>
-                <p>We develop various types of games, currently focusing on arcade-style games with modern twists. Our first release is Pong Clash!</p>
-            </div>
-            <div class="faq-item">
-                <h3>How can I play your games? <span class="faq-toggle">&#9654;</span></h3>
-                <p>Our games are available on itch.io. You can find Pong Clash! and future releases on our itch.io page.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Do you accept game ideas from the community? <span class="faq-toggle">&#9654;</span></h3>
-                <p>Yes! We welcome suggestions and feedback from our community. Feel free to reach out through our contact form.</p>
-            </div>
-            <div class="faq-item">
-                <h3>How can I join your team? <span class="faq-toggle">&#9654;</span></h3>
-                <p>We occasionally look for new talent. Follow our social media for job openings and opportunities.</p>
-            </div>
-        </div>
-    </section>
+    private Vector3 startPosition;
+    private Vector3 pullDirection;
+    private bool isPulling = false;
+    private Rigidbody2D rb;
+    private PhysicsMaterial2D physicsMaterial;
+    private float currentPullDistance = 0f;
+    private float currentPullStrength = 0f;
+    public bool canPull = true;
+    public AudioSource bounceAudioSource; // Assign in Inspector
 
-    <section id="games-updates" class="games">
-        <h2>Our Games & Latest Updates</h2>
-        <div class="games-grid">
-            <div class="game-card">
-                <div class="game-img" style="background-image: url('./assets/Po.png');"></div>
-                <h3>Pong Clash!</h3>
-                <p>A classic arcade game reimagined with modern twists and exciting features.</p>
-                <a href="https://likha-studio.itch.io/pong-clash" class="play-button">Play Now</a>
-            </div>
-            <div class="game-card">
-                <div class="game-img" style="background-image: url('./assets/Bounce.png');"></div>
-                <h3>Bounce it</h3>
-                <p>Bounce it has been released! Play an endless bouncing game and reach for the highest score. Download now for Android.</p>
-                <a href="https://likha-studio.itch.io/bounce-it" class="play-button">Download APK</a>
-            </div>
-            <!-- Add more game cards here if needed -->
-        </div>
-    </section>
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody2D component not found on the player!");
+            return;
+        }
 
-    <section id="team" class="team">
-        <h2>Meet Our Team</h2>
-        <div class="team-grid">
-            <div class="team-member">
-                <div class="member-img" style="background-image: url('./assets/p.png');"></div>
-                <h3>Charles Austin H. Manalo</h3>
-                <p class="role">Game Developer & Designer</p>
-                <p class="description">Specializes in game mechanics and programming. Brings technical expertise to our projects.</p>
-                <div class="member-social">
-                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="team-member">
-                <div class="member-img" style="background-image: url('./assets/p.png');"></div>
-                <h3>Vincent Vitto</h3>
-                <p class="role">Game Designer & Music Production</p>
-                <p class="description">Creates immersive soundscapes and musical experiences for our games.</p>
-                <div class="member-social">
-                    <a href="#" class="social-icon"><i class="fab fa-soundcloud"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="team-member">
-                <div class="member-img" style="background-image: url('./assets/p.png');"></div>
-                <h3>Donn Carlo Tubera</h3>
-                <p class="role">Game Designer & Idea Maker</p>
-                <p class="description">Brings creative concepts and innovative gameplay ideas to life.</p>
-                <div class="member-social">
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
+        rb.linearDamping = 0f;
+        rb.angularDamping = angularDrag;
+        rb.gravityScale = gravityScale;
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        rb.constraints = RigidbodyConstraints2D.None;
 
-    <section id="games" class="games">
-        <h2>Our Games</h2>
-        <div class="games-grid">
-            <div class="game-card">
-                <div class="game-img" style="background-image: url('./assets/Po.png');"></div>
-                <h3>Pong Clash!</h3>
-                <p>A classic arcade game reimagined with modern twists and exciting features.</p>
-                <a href="https://likha-studio.itch.io/pong-clash" class="play-button">Play Now</a>
-            </div>
-            <div class="game-card">
-                <div class="game-img" style="background-image: url('./assets/Bounce.png');"></div>
-                <h3>Bounce it</h3>
-                <p>Bounce your way to victory in this fun and challenging arcade game! Now available for Android. and Web Browser</p>
-                <a href="https://likha-studio.itch.io/bounce-it" class="play-button">Download APK</a>
-            </div>
-        </div>
-    </section>
+        physicsMaterial = new PhysicsMaterial2D("IceMaterial");
+        physicsMaterial.friction = friction;
+        physicsMaterial.bounciness = bounciness;
+        GetComponent<Collider2D>().sharedMaterial = physicsMaterial;
+    }
 
-    <section id="contact" class="contact">
-        <!-- Add contact section background: recommended size 1920x800px -->
-        <h2>Contact Us</h2>
-        <div class="contact-content">
-            <form id="contact-form" action="https://formsubmit.co/charlesaustinmanalo@gmail.com" method="POST">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                </div>
-                <button type="submit" class="submit-button">Send Message</button>
-            </form>
-            <div class="social-links">
-                <a href="https://x.com/StudioLikha" class="social-icon" aria-label="Follow us on X"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon" aria-label="Follow us on Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="social-icon" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon" aria-label="Join our Discord"><i class="fab fa-discord"></i></a>
-            </div>
-        </div>
-    </section>
+    private void Update()
+    {
+        if (!canPull)
+            return;
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#games">Games</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <div class="footer-section">
-                <h3>Connect With Us</h3>
-                <div class="social-links">
-                    <a href="https://x.com/StudioLikha" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
-                </div>
-            </div>
-        </div>
-        <p>&copy; 2024 Likha Studios. All rights reserved.</p>
-    </footer>
+        HandleTouchInput();
+        LimitSpeeds();
+    }
 
-    <script src="script.js"></script>
-</body>
-</html>
+    private void HandleTouchInput()
+    {
+        // Handle touch input
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+            touchPosition.z = 0;
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                startPosition = transform.position;
+                isPulling = true;
+            }
+            else if (isPulling && (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary))
+            {
+                pullDirection = startPosition - touchPosition;
+                currentPullDistance = Mathf.Clamp(pullDirection.magnitude, 0f, maxPullDistance);
+                currentPullStrength = currentPullDistance / maxPullDistance;
+                pullDirection = pullDirection.normalized * currentPullDistance;
+            }
+            else if (touch.phase == TouchPhase.Ended && isPulling)
+            {
+                Launch();
+                isPulling = false;
+            }
+        }
+        // Handle mouse input for WebGL
+        else
+        {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                startPosition = transform.position;
+                isPulling = true;
+            }
+            else if (isPulling && Input.GetMouseButton(0))
+            {
+                pullDirection = startPosition - mousePosition;
+                currentPullDistance = Mathf.Clamp(pullDirection.magnitude, 0f, maxPullDistance);
+                currentPullStrength = currentPullDistance / maxPullDistance;
+                pullDirection = pullDirection.normalized * currentPullDistance;
+            }
+            else if (Input.GetMouseButtonUp(0) && isPulling)
+            {
+                Launch();
+                isPulling = false;
+            }
+            else
+            {
+                currentPullDistance = 0f;
+                currentPullStrength = 0f;
+            }
+        }
+    }
+
+    private void LimitSpeeds()
+    {
+        if (rb != null)
+        {
+            Vector2 velocity = rb.linearVelocity;
+            Vector2 horizontalVelocity = new Vector2(velocity.x, 0);
+
+            if (horizontalVelocity.magnitude > maxSlideSpeed)
+            {
+                horizontalVelocity = horizontalVelocity.normalized * maxSlideSpeed;
+                rb.linearVelocity = new Vector2(horizontalVelocity.x, velocity.y);
+            }
+
+            if (Mathf.Abs(rb.angularVelocity) > maxAngularSpeed)
+            {
+                rb.angularVelocity = Mathf.Sign(rb.angularVelocity) * maxAngularSpeed;
+            }
+        }
+    }
+
+    private void Launch()
+    {
+        if (rb != null)
+        {
+            float forceMagnitude = Mathf.Clamp(pullDirection.magnitude * launchForce, 0f, maxLaunchForce);
+            rb.AddForce(pullDirection.normalized * forceMagnitude, ForceMode2D.Impulse);
+
+            float randomTorque = Random.Range(-5f, 5f);
+            rb.AddTorque(randomTorque, ForceMode2D.Impulse);
+        }
+
+        FindObjectOfType<MotionlessPowerup>()?.OnPlayerLaunched();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (rb != null && rb.linearVelocity.magnitude > 1f)
+        {
+            Vector2 randomBounce = new Vector2(
+              Random.Range(-0.2f, 0.2f),
+              Random.Range(-0.2f, 0.2f)
+            );
+            rb.linearVelocity += randomBounce;
+
+            float randomTorque = Random.Range(-2f, 2f);
+            rb.AddTorque(randomTorque, ForceMode2D.Impulse);
+
+            bounceAudioSource?.Play();
+        }
+    }
+
+    private void OnGUI()
+    {
+        if (isPulling)
+        {
+            float barWidth = 500f;
+            float barHeight = 60f;
+            float x = 20f;
+            float y = 50f;
+            GUI.Box(new Rect(x, y, barWidth, barHeight), "");
+            GUI.color = Color.green;
+            GUI.Box(new Rect(x, y, barWidth * currentPullStrength, barHeight), "");
+            GUI.color = Color.white;
+
+            GUIStyle labelStyle = new GUIStyle(GUI.skin.label)
+            {
+                fontSize = 40,
+                fontStyle = FontStyle.Bold,
+                normal = { textColor = Color.white },
+                alignment = TextAnchor.MiddleLeft
+            };
+            GUI.Label(new Rect(x, y - 50, barWidth, 50), $"Power: {(int)(currentPullStrength * 100)}%", labelStyle);
+
+            Vector3 worldStart = transform.position;
+            Vector3 launchDir = -pullDirection.normalized;
+            float lineLength = 2f + currentPullStrength * 2f;
+            Vector3 worldEnd = worldStart + launchDir * lineLength;
+
+            Vector3 screenStart = Camera.main.WorldToScreenPoint(worldStart);
+            Vector3 screenEnd = Camera.main.WorldToScreenPoint(worldEnd);
+            screenStart.y = Screen.height - screenStart.y;
+            screenEnd.y = Screen.height - screenEnd.y;
+
+            // Only draw if valid
+            if ((screenStart - screenEnd).sqrMagnitude > 0.01f)
+            {
+                Drawing.DrawLine(screenStart, screenEnd, Color.yellow, 4f, true);
+            }
+
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (isPulling)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, transform.position + pullDirection);
+
+            Vector3 arrowStart = transform.position;
+            Vector3 launchDir = -pullDirection.normalized;
+            float lineLength = 2f + currentPullStrength * 2f;
+            Vector3 arrowEnd = arrowStart + launchDir * lineLength;
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(arrowStart, arrowEnd);
+        }
+    }
+}
