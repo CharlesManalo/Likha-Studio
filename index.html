@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Likha Studios - A small indie game development team from the Philippines creating unique and engaging gaming experiences">
+    <meta name="keywords" content="indie games, game development, Philippines, Likha Studios, Pong Clash">
+    <meta name="author" content="Likha Studios">
+    <meta property="og:title" content="Likha Studios - Indie Game Development Team">
+    <meta property="og:description" content="Creating unique and engaging gaming experiences">
+    <meta property="og:image" content="./assets/Hero.png">
+    <meta property="og:url" content="https://likha-studio.itch.io">
     <title>Likha Studios - Indie Game Development Team</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="./assets/Untitled (150 x 50 px).png">
 </head>
 <body>
     <!-- Add your logo image in the nav-brand div -->
@@ -24,7 +32,11 @@
             <a href="#about">About Us</a>
             <a href="#team">Our Team</a>
             <a href="#games">Games</a>
+            <a href="#blog">Blog</a>
             <a href="#contact">Contact</a>
+            <button id="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
     </nav>
 
@@ -40,6 +52,64 @@
         <h2>About Our Studio</h2>
         <div class="about-content">
             <p>Likha Studios is a small indie game development team dedicated to creating unique and engaging gaming experiences. Our focus is on innovation, creativity, and player satisfaction.</p>
+            <div class="about-grid">
+                <div class="about-card">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Our Vision</h3>
+                    <p>To create memorable gaming experiences that bring joy and excitement to players worldwide.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Our Mission</h3>
+                    <p>To develop innovative games that push creative boundaries while maintaining high quality and player engagement.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Our Achievements</h3>
+                    <p>Successfully launched Pong Clash! on itch.io, gaining positive feedback from the gaming community.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq" style="text-align:center;">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <h3>What games do you develop? <span class="faq-toggle">&#9654;</span></h3>
+                <p>We develop various types of games, currently focusing on arcade-style games with modern twists. Our first release is Pong Clash!</p>
+            </div>
+            <div class="faq-item">
+                <h3>How can I play your games? <span class="faq-toggle">&#9654;</span></h3>
+                <p>Our games are available on itch.io. You can find Pong Clash! and future releases on our itch.io page.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Do you accept game ideas from the community? <span class="faq-toggle">&#9654;</span></h3>
+                <p>Yes! We welcome suggestions and feedback from our community. Feel free to reach out through our contact form.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How can I join your team? <span class="faq-toggle">&#9654;</span></h3>
+                <p>We occasionally look for new talent. Follow our social media for job openings and opportunities.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="games-updates" class="games">
+        <h2>Our Games & Latest Updates</h2>
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="game-img" style="background-image: url('./assets/pong.png');"></div>
+                <h3>Pong Clash!</h3>
+                <p>A classic arcade game reimagined with modern twists and exciting features.</p>
+                <a href="https://likha-studio.itch.io/pong-clash" class="play-button">Play Now</a>
+            </div>
+            <div class="game-card">
+                <div class="game-img" style="background-image: url('./assets/Bounce.png');"></div>
+                <h3>Bounce it</h3>
+                <p>Bounce it has been released! Play an endless bouncing game and reach for the highest score. Download now for Android.</p>
+                <a href="https://likha-studio.itch.io/bounce-it" class="play-button">Download APK</a>
+            </div>
+            <!-- Add more game cards here if needed -->
         </div>
     </section>
 
@@ -49,17 +119,32 @@
             <div class="team-member">
                 <div class="member-img" style="background-image: url('./assets/p.png');"></div>
                 <h3>Charles Austin H. Manalo</h3>
-                <p>Game Developer & Designer</p>
+                <p class="role">Game Developer & Designer</p>
+                <p class="description">Specializes in game mechanics and programming. Brings technical expertise to our projects.</p>
+                <div class="member-social">
+                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
             <div class="team-member">
                 <div class="member-img" style="background-image: url('./assets/p.png');"></div>
                 <h3>Vincent Vitto</h3>
-                <p>Game Designer & Music Production</p>
+                <p class="role">Game Designer & Music Production</p>
+                <p class="description">Creates immersive soundscapes and musical experiences for our games.</p>
+                <div class="member-social">
+                    <a href="#" class="social-icon"><i class="fab fa-soundcloud"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
             <div class="team-member">
                 <div class="member-img" style="background-image: url('./assets/p.png');"></div>
                 <h3>Donn Carlo Tubera</h3>
-                <p>Game Designer & Idea Maker</p>
+                <p class="role">Game Designer & Idea Maker</p>
+                <p class="description">Brings creative concepts and innovative gameplay ideas to life.</p>
+                <div class="member-social">
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
         </div>
     </section>
@@ -68,10 +153,16 @@
         <h2>Our Games</h2>
         <div class="games-grid">
             <div class="game-card">
-                <div class="game-img" style="background-image: url('./assets/Po.png');"></div>
+                <div class="game-img" style="background-image: url('./assets/pong.png');"></div>
                 <h3>Pong Clash!</h3>
                 <p>A classic arcade game reimagined with modern twists and exciting features.</p>
                 <a href="https://likha-studio.itch.io/pong-clash" class="play-button">Play Now</a>
+            </div>
+            <div class="game-card">
+                <div class="game-img" style="background-image: url('./assets/Bounce.png');"></div>
+                <h3>Bounce it</h3>
+                <p>Bounce your way to victory in this fun and challenging arcade game! Now available for Android. and Web Browser</p>
+                <a href="https://likha-studio.itch.io/bounce-it" class="play-button">Download APK</a>
             </div>
         </div>
     </section>
@@ -80,22 +171,49 @@
         <!-- Add contact section background: recommended size 1920x800px -->
         <h2>Contact Us</h2>
         <div class="contact-content">
-            <form id="contact-form">
-                <input type="text" placeholder="Name" required>
-                <input type="email" placeholder="Email" required>
-                <textarea placeholder="Message" required></textarea>
+            <form id="contact-form" action="https://formsubmit.co/charlesaustinmanalo@gmail.com" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                </div>
                 <button type="submit" class="submit-button">Send Message</button>
             </form>
             <div class="social-links">
-                <a href="https://x.com/StudioLikha" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                <a href="https://x.com/StudioLikha" class="social-icon" aria-label="Follow us on X"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon" aria-label="Follow us on Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="social-icon" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon" aria-label="Join our Discord"><i class="fab fa-discord"></i></a>
             </div>
         </div>
     </section>
 
     <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#games">Games</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="https://x.com/StudioLikha" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
         <p>&copy; 2024 Likha Studios. All rights reserved.</p>
     </footer>
 
