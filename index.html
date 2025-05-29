@@ -43,8 +43,25 @@
     <section id="home" class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./assets/Hero.png') center/cover;">
         <div class="hero-content">
             <h1>Welcome to Likha Studios</h1>
-            <p> A small indie game developers from the Philippines</p>
-            <a href="#games" class="cta-button">View Our Games</a>
+            <p class="hero-subtitle">Crafting Unique Gaming Experiences from the Philippines</p>
+            <div class="hero-buttons">
+                <a href="https://charles-manalo.itch.io/" class="cta-button primary" target="_blank">Play Our Games</a>
+                <a href="#about" class="cta-button secondary">Learn More</a>
+            </div>
+            <div class="hero-features">
+                <div class="feature">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Free Games</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Mobile & Web</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-users"></i>
+                    <span>Active Community</span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -72,24 +89,60 @@
         </div>
     </section>
 
-    <section id="faq" class="faq" style="text-align:center;">
+    <section id="faq" class="faq">
         <h2>Frequently Asked Questions</h2>
         <div class="faq-container">
             <div class="faq-item">
-                <h3>What games do you develop? <span class="faq-toggle">&#9654;</span></h3>
-                <p>We develop various types of games, currently focusing on arcade-style games with modern twists. Our first release is Pong Clash!</p>
+                <div class="faq-question">
+                    <h3>What games do you develop?</h3>
+                    <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>We develop various types of games, currently focusing on arcade-style games with modern twists. Our first release is Pong Clash!</p>
+                    <div class="faq-meta">
+                        <span><i class="fas fa-gamepad"></i> Arcade Games</span>
+                        <span><i class="fas fa-mobile-alt"></i> Mobile & Web</span>
+                    </div>
+                </div>
             </div>
             <div class="faq-item">
-                <h3>How can I play your games? <span class="faq-toggle">&#9654;</span></h3>
-                <p>Our games are available on itch.io. You can find Pong Clash! and future releases on our itch.io page.</p>
+                <div class="faq-question">
+                    <h3>How can I play your games?</h3>
+                    <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Our games are available on itch.io. You can find Pong Clash! and future releases on our itch.io page.</p>
+                    <div class="faq-meta">
+                        <span><i class="fas fa-globe"></i> Web Browser</span>
+                        <span><i class="fas fa-download"></i> Free Download</span>
+                    </div>
+                </div>
             </div>
             <div class="faq-item">
-                <h3>Do you accept game ideas from the community? <span class="faq-toggle">&#9654;</span></h3>
-                <p>Yes! We welcome suggestions and feedback from our community. Feel free to reach out through our contact form.</p>
+                <div class="faq-question">
+                    <h3>Do you accept game ideas from the community?</h3>
+                    <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! We welcome suggestions and feedback from our community. Feel free to reach out through our contact form.</p>
+                    <div class="faq-meta">
+                        <span><i class="fas fa-users"></i> Community Driven</span>
+                        <span><i class="fas fa-comments"></i> Open to Feedback</span>
+                    </div>
+                </div>
             </div>
             <div class="faq-item">
-                <h3>How can I join your team? <span class="faq-toggle">&#9654;</span></h3>
-                <p>We occasionally look for new talent. Follow our social media for job openings and opportunities.</p>
+                <div class="faq-question">
+                    <h3>How can I join your team?</h3>
+                    <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>We occasionally look for new talent. Follow our social media for job openings and opportunities.</p>
+                    <div class="faq-meta">
+                        <span><i class="fas fa-briefcase"></i> Career Opportunities</span>
+                        <span><i class="fas fa-user-plus"></i> Join Our Team</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -97,88 +150,106 @@
     <section id="games-updates" class="games">
         <h2>Our Games & Latest Updates</h2>
         <div class="games-grid">
-            <div class="game-card">
-                <div class="game-img" style="background-image: url('./assets/pong.png');"></div>
-                <h3>Pong Clash!</h3>
-                <p>A classic arcade game reimagined with modern twists and exciting features.</p>
-                <a href="https://likha-studio.itch.io/pong-clash" class="play-button">View on itch.io</a>
+            <div class="game-card featured">
+                <div class="game-img" style="background-image: url('./assets/Po.png');">
+                    <div class="game-overlay">
+                        <span class="game-status">Featured</span>
+                    </div>
+                </div>
+                <div class="game-info">
+                    <h3>Pong Clash!</h3>
+                    <p>A classic arcade game reimagined with modern twists and exciting features.</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-gamepad"></i> Multiplayer</span>
+                        <span><i class="fas fa-trophy"></i> Competitive</span>
+                    </div>
+                    <a href="https://likha-studio.itch.io/pong-clash" class="play-button">Play Now</a>
+                </div>
             </div>
             <div class="game-card">
-                <div class="game-img" style="background-image: url('./assets/Bounce.png');"></div>
-                <h3>Bounce it</h3>
-                <p>Bounce it has been released! Play an endless bouncing game and reach for the highest score. Download now for Android.</p>
-                <a href="https://likha-studio.itch.io/bounce-it" class="play-button">View on itch.io</a>
+                <div class="game-img" style="background-image: url('./assets/Bounce.png');">
+                    <div class="game-overlay">
+                        <span class="game-status">New Release</span>
+                    </div>
+                </div>
+                <div class="game-info">
+                    <h3>Bounce it</h3>
+                    <p>Bounce your way to victory in this fun and challenging arcade game!</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-mobile-alt"></i> Mobile & Web</span>
+                        <span><i class="fas fa-star"></i> Casual</span>
+                    </div>
+                    <a href="https://likha-studio.itch.io/bounce-it" class="play-button">Play Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-img" style="background-image: url('./assets/tx.png');">
+                    <div class="game-overlay">
+                        <span class="game-status">Latest Release</span>
+                    </div>
+                </div>
+                <div class="game-info">
+                    <h3>Tidal Wave</h3>
+                    <p>Defend your base in this intense tower defense shooter! Face waves of unique enemies, upgrade your arsenal, and survive the endless onslaught.</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-tower-defense"></i> Tower Defense</span>
+                        <span><i class="fas fa-bolt"></i> Action</span>
+                    </div>
+                    <a href="https://charles-manalo.itch.io/tidal-wave" class="play-button">Play Now</a>
+                </div>
             </div>
             <div class="game-card in-development">
-                <div class="game-img" style="background-image: url('./assets/deep-dive-placeholder.png'); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2em; background-color: #222;">
-                    <span style="width:100%;text-align:center;">In Development</span>
+                <div class="game-img" style="background-image: url('./assets/dd.png');">
+                    <div class="game-overlay">
+                        <span class="game-status">In Beta</span>
+                    </div>
                 </div>
-                <h3>Deep Dive</h3>
-                <p>Descend into the abyss in this pressure-management survival game. Coming soon!</p>
-                <a href="https://likha-studio.itch.io/deep-dive" class="play-button" target="_blank">View on itch.io</a>
-            </div>
-            <!-- Add more game cards here if needed -->
-        </div>
-    </section>
-
-    <section id="team" class="team">
-        <h2>Meet Our Team</h2>
-        <div class="team-grid">
-            <div class="team-member">
-                <div class="member-img" style="background-image: url('./assets/p.png');"></div>
-                <h3>Charles Austin H. Manalo</h3>
-                <p class="role">Game Developer & Designer</p>
-                <p class="description">Specializes in game mechanics and programming. Brings technical expertise to our projects.</p>
-                <div class="member-social">
-                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="team-member">
-                <div class="member-img" style="background-image: url('./assets/p.png');"></div>
-                <h3>Vincent Vitto</h3>
-                <p class="role">Game Designer & Music Production</p>
-                <p class="description">Creates immersive soundscapes and musical experiences for our games.</p>
-                <div class="member-social">
-                    <a href="#" class="social-icon"><i class="fab fa-soundcloud"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="team-member">
-                <div class="member-img" style="background-image: url('./assets/p.png');"></div>
-                <h3>Donn Carlo Tubera</h3>
-                <p class="role">Game Designer & Idea Maker</p>
-                <p class="description">Brings creative concepts and innovative gameplay ideas to life.</p>
-                <div class="member-social">
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <div class="game-info">
+                    <h3>Deep Dive</h3>
+                    <p>Descend into the abyss in this pressure-management survival game. Currently in beta testing - join us to shape the future of the game!</p>
+                    <div class="game-meta">
+                        <span><i class="fas fa-flask"></i> Beta Testing</span>
+                        <span><i class="fas fa-download"></i> Early Access</span>
+                    </div>
+                    <a href="https://likha-studio.itch.io/deep-dive" class="play-button" target="_blank">Join Beta</a>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section id="games" class="games">
-        <h2>Our Games</h2>
-        <div class="games-grid">
-            <div class="game-card">
-                <div class="game-img" style="background-image: url('./assets/Po.png');"></div>
-                <h3>Pong Clash!</h3>
-                <p>A classic arcade game reimagined with modern twists and exciting features.</p>
-                <a href="https://likha-studio.itch.io/pong-clash" class="play-button">View on itch.io</a>
-            </div>
-            <div class="game-card">
-                <div class="game-img" style="background-image: url('./assets/Bounce.png');"></div>
-                <h3>Bounce it</h3>
-                <p>Bounce your way to victory in this fun and challenging arcade game! Now available for Android. and Web Browser</p>
-                <a href="https://likha-studio.itch.io/bounce-it" class="play-button">View on itch.io</a>
-            </div>
-            <div class="game-card in-development">
-                <div class="game-img" style="background-image: url('./assets/deep-dive-placeholder.png'); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2em; background-color: #222;">
-                    <span style="width:100%;text-align:center;">In Development</span>
+        <div class="update-panel">
+            <h2>Latest Updates</h2>
+            <div class="update-content">
+                <div class="update-header">
+                    <h3>New Game Release: Tidal Wave!</h3>
+                    <span class="update-date">Latest Release</span>
                 </div>
-                <h3>Deep Dive</h3>
-                <p>Descend into the abyss in this pressure-management survival game. Coming soon!</p>
-                <a href="https://likha-studio.itch.io/deep-dive" class="play-button" target="_blank">View on itch.io</a>
+                <div class="update-details">
+                    <h4>What's New:</h4>
+                    <div class="update-section">
+                        <h5><i class="fas fa-gamepad"></i> Tidal Wave - Tower Defense Shooter</h5>
+                        <p>Hello guy's I'm happy to announce a new game i have made this week hope everyone enjoys it and i would love some of your feedbacks^^.</p>
+                        <div class="game-features">
+                            <h6>Game Features:</h6>
+                            <ul>
+                                <li>Defend your base against waves of enemies</li>
+                                <li>Multiple enemy types with unique abilities</li>
+                                <li>Upgrade your arsenal with powerful weapons</li>
+                                <li>Strategic resource management</li>
+                                <li>Endless wave system for continuous challenge</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="update-section">
+                        <h5><i class="fas fa-star"></i> Game Description</h5>
+                        <p><strong>Defend your base against relentless waves of enemies in this fast-paced tower defense shooter!</strong></p>
+                        <ul>
+                            <li>Start with 100 health - lose 25 health each time an enemy breaches your defenses</li>
+                            <li>Begin with 50 bullets - manage your ammo wisely</li>
+                            <li>Earn 3 coins for every enemy defeated</li>
+                            <li>Use coins to upgrade your arsenal or buy more ammo</li>
+                        </ul>
+                    </div>
+                    <a href="https://charles-manalo.itch.io/tidal-wave" class="read-more" target="_blank">Play Tidal Wave Now</a>
+                </div>
             </div>
         </div>
     </section>
