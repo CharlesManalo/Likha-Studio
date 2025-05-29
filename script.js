@@ -62,107 +62,154 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Theme Toggle
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
-const icon = themeToggle.querySelector('i');
-
-// Check for saved theme preference
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    body.classList.add(savedTheme);
-    updateThemeIcon();
-}
-
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-theme');
-    updateThemeIcon();
-    // Save theme preference
-    localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark-theme' : '');
-});
-
-function updateThemeIcon() {
-    if (body.classList.contains('dark-theme')) {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-    } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-    }
-}
-
-// Form Handling
-function handleSubmit(event) {
-    event.preventDefault();
+// Theme Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
     
-    const form = event.target;
-    const formStatus = document.getElementById('form-status');
-    const submitButton = form.querySelector('.submit-button');
-    
-    // Get form data
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-    
-    // Disable submit button and show loading state
-    submitButton.disabled = true;
-    submitButton.textContent = 'Sending...';
-    formStatus.textContent = '';
-    
-    // Simulate form submission (replace with actual API endpoint)
-    setTimeout(() => {
-        // Here you would typically send the data to your backend
-        console.log('Form data:', data);
-        
-        // Show success message
-        formStatus.textContent = 'Message sent successfully!';
-        formStatus.className = 'form-status success';
-        
-        // Reset form
-        form.reset();
-        
-        // Re-enable submit button
-        submitButton.disabled = false;
-        submitButton.textContent = 'Send Message';
-        
-        // Clear success message after 5 seconds
-        setTimeout(() => {
-            formStatus.textContent = '';
-            formStatus.className = 'form-status';
-        }, 5000);
-    }, 1000);
-    
-    return false;
-}
-
-// Mobile Navigation
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
-
-hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    hamburger.classList.toggle('active');
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (event) => {
-    if (!event.target.closest('.navbar')) {
-        navLinks.classList.remove('active');
-        hamburger.classList.remove('active');
-    }
-});
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
-            // Close mobile menu after clicking a link
-            navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-theme');
+        const icon = themeToggle.querySelector('i');
+        if (body.classList.contains('dark-theme')) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        } else {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
         }
+    });
+
+    // Mobile Navigation
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Smooth Scrolling for Navigation Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                // Close mobile menu if open
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+    });
+
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        const toggle = item.querySelector('.faq-toggle');
+        
+        question.addEventListener('click', () => {
+            const isOpen = item.classList.contains('active');
+            
+            // Close all other items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                    otherItem.querySelector('.faq-toggle').style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('active');
+            if (!isOpen) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                toggle.style.transform = 'rotate(180deg)';
+            } else {
+                answer.style.maxHeight = null;
+                toggle.style.transform = 'rotate(0deg)';
+            }
+        });
+    });
+
+    // Game Card Hover Effects
+    const gameCards = document.querySelectorAll('.game-card');
+    
+    gameCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.classList.add('hover');
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.classList.remove('hover');
+        });
+    });
+
+    // Contact Form Validation and Submission
+    const contactForm = document.getElementById('contact-form');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic form validation
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || !message) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // If validation passes, submit the form
+            this.submit();
+        });
+    }
+
+    // Social Media Links
+    const socialLinks = document.querySelectorAll('.social-links a');
+    
+    socialLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (!link.getAttribute('href') || link.getAttribute('href') === '#') {
+                e.preventDefault();
+                alert('This social media link is coming soon!');
+            }
+        });
+    });
+
+    // Scroll to Top Button
+    const scrollTopBtn = document.createElement('button');
+    scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    scrollTopBtn.className = 'scroll-top-btn';
+    document.body.appendChild(scrollTopBtn);
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.classList.add('show');
+        } else {
+            scrollTopBtn.classList.remove('show');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 });
