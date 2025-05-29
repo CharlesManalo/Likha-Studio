@@ -73,13 +73,13 @@ body {
     border: none;
     color: var(--text-color);
     cursor: pointer;
-    font-size: 1.2rem;
-    padding: 0.5rem;
-    transition: color 0.3s;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
 }
 
 #theme-toggle:hover {
-    color: var(--primary-color);
+    background-color: var(--hover-color);
 }
 
 /* Hero Section */
@@ -359,11 +359,12 @@ section.active {
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 0.8rem;
+    padding: 10px;
     border: 1px solid var(--border-color);
-    border-radius: 5px;
+    border-radius: 4px;
     background-color: var(--background-color);
     color: var(--text-color);
+    transition: border-color 0.3s;
 }
 
 .form-group textarea {
@@ -371,18 +372,24 @@ section.active {
     resize: vertical;
 }
 
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
 .submit-button {
-    background-color: var(--primary-color);
+    background-color: var(--accent-color);
     color: white;
-    padding: 1rem 2rem;
     border: none;
-    border-radius: 5px;
+    padding: 12px 24px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .submit-button:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--accent-hover-color);
 }
 
 .submit-button:disabled {
@@ -438,7 +445,7 @@ footer {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 10px;
 }
 
 .hamburger span {
@@ -450,39 +457,16 @@ footer {
     transition: 0.3s;
 }
 
-@media (max-width: 768px) {
-    .hamburger {
-        display: block;
-    }
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
 
-    .nav-links {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: var(--background-color);
-        padding: 1rem;
-        flex-direction: column;
-        gap: 1rem;
-        transform: translateY(-100%);
-        transition: transform 0.3s;
-    }
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
 
-    .nav-links.active {
-        transform: translateY(0);
-    }
-
-    .hamburger.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px);
-    }
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
 }
 
 /* Animations */
@@ -521,13 +505,15 @@ footer {
 
 .faq-item {
     background: var(--card-background);
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     padding: 1.5rem 2rem;
     cursor: pointer;
     transition: box-shadow 0.3s, background 0.3s;
     position: relative;
     overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin-bottom: 10px;
 }
 
 .faq-item:hover {
@@ -568,6 +554,39 @@ footer {
     max-height: 200px;
     opacity: 1;
     margin-top: 1rem;
+}
+
+.faq-question {
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-color);
+    transition: background-color 0.3s;
+}
+
+.faq-question:hover {
+    background-color: var(--hover-color);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 15px;
+}
+
+.faq-item.active .faq-answer {
+    padding: 15px;
+}
+
+.faq-meta {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: var(--secondary-text-color);
 }
 
 @media (max-width: 600px) {
@@ -663,4 +682,285 @@ footer {
     opacity: 1;
     transform: none;
     animation: fadeIn 0.8s ease-out;
+}
+
+/* Dark Theme */
+.dark-theme {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --secondary-text-color: #b3b3b3;
+    --border-color: #333333;
+    --hover-color: #2a2a2a;
+    --accent-color: #00eaff;
+    --accent-hover-color: #00c4d4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: var(--bg-color);
+        padding: 20px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.3s, opacity 0.3s, visibility 0.3s;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 10px 0;
+        text-align: center;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content,
+.about-card,
+.team-member,
+.blog-post {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Social Links */
+.social-links a {
+    color: var(--text-color);
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Scroll to Top Button */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.scroll-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-top-btn:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* Update Panel Styles */
+.update-panel {
+    background-color: var(--background-color);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-top: 3rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.update-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.update-header h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.update-date {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.update-details {
+    text-align: left;
+}
+
+.update-details h4 {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.update-section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: var(--card-background);
+    border-radius: 10px;
+}
+
+.update-section h5 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.update-section h5 i {
+    color: var(--accent-color);
+}
+
+.update-section ul {
+    list-style-type: none;
+    padding-left: 1.5rem;
+}
+
+.update-section ul li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    line-height: 1.6;
+}
+
+.update-section ul li:before {
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: -1rem;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.read-more:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* Game Card Improvements */
+.game-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.game-img {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.game-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.game-info {
+    padding: 1rem;
+    text-align: left;
+}
+
+.game-meta {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.game-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+}
+
+.game-meta i {
+    color: var(--accent-color);
+}
+
+/* Dark Theme Adjustments */
+.dark-theme .update-section {
+    background-color: var(--card-background);
+}
+
+.dark-theme .update-section h5 {
+    color: var(--accent-color);
+}
+
+.dark-theme .update-section ul li:before {
+    color: var(--accent-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .update-panel {
+        padding: 1.5rem;
+        margin: 2rem 1rem;
+    }
+
+    .update-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .update-section {
+        padding: 0.8rem;
+    }
 }
